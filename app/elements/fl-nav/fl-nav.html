@@ -1,0 +1,40 @@
+<dom-module id="fl-nav">
+  <style>
+    :host {
+      --fl-nav-height: 42px;
+      --fl-nav-animation-curve-fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+
+      @apply(--layout-horizontal);
+      @apply(--layout-center-center);
+      height: var(--fl-nav-height);
+      margin: 20px auto;
+    }
+    a {
+      @apply(--fl-nav-link-font);
+    }
+    paper-button {
+      color: var(--primary-text-color);
+
+      will-change: background-color, color;
+      transition: background-color 0.2s var(--fl-nav-animation-curve-fast-out-slow-in),
+                  color 0.2s var(--fl-nav-animation-curve-fast-out-slow-in);
+    }
+    paper-button:hover {
+      background-color: var(--default-primary-color-hover);
+    }
+    paper-button:active {
+      background-color: var(--default-primary-color-pressed);
+    }
+
+  </style>
+  <template>
+    <a href="http://blog.fenneclab.com/" target="_blank"><paper-button noink>blog</paper-button></a>
+    <a href="#item1"><paper-button noink>product</paper-button></a>
+    <a href="#item1"><paper-button noink>twitter</paper-button>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'fl-nav'
+  });
+</script>

@@ -1,0 +1,12 @@
+<script src="../bower_components/page/page.js"></script>
+<script>
+  window.addEventListener('WebComponentsReady', function() {
+    page.base('/');
+
+    // add #! before urls
+    page({
+      hashbang: true
+    });
+
+  });
+</script>

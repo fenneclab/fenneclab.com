@@ -1,0 +1,83 @@
+<dom-module id="fl-the-cloud">
+  <style>
+    :host {
+
+    }
+  </style>
+  <template>
+    <svg id="svg" width$="{{width}}" height$="{{height}}" primary-color="{{primaryColor}}" secondary-color="{{secondaryColor}}"></svg>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'fl-the-cloud',
+    properties: {
+      width: Number,
+      height: Number,
+      primaryColor: String,
+      secondaryColor: String
+    },
+    _circle: function(s, x, midX, midY) {
+      var minY = this.height / 4;
+      var maxY = this.height - this.height / 5;
+      var y, r;
+      var inValid = true;
+      do {
+        if (this._prevY) {
+          minY = Math.max(this.height / 4, this._prevY - this.height / 4);
+          maxY = Math.min(this.height - this.height / 5, this._prevY + this.height / 4);
+        }
+        y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+
+        var maxR = Math.min(midX - Math.abs(midX - x), midY - Math.abs(midY - y));
+        var minR = Math.min(this.height / 5, this.width / 5);
+
+        r = Math.floor(Math.random() * (maxR - minR + 1)) + minR;
+        if (this._clouds.length === 0) {
+          inValid = false;
+        } else {
+          var distance = Math.sqrt(Math.pow(x - this._prevX, 2) +  Math.pow(y - this._prevY, 2));
+          if (r + this._prevR > distance) {
+            inValid = false;
+          }
+        }
+      } while (inValid);
+
+      var c = s.circle(x, y, r);
+      this._prevX = x;
+      this._prevY = y;
+      this._prevR = r;
+      this._clouds.push(c);
+    },
+    ready: function() {
+      var s = Snap(this.$.svg);
+      var count = 5;
+
+      var midX = this.width / 2;
+      var midY = this.height / 2;
+
+      var x = 0;
+      this._clouds = [];
+      var g = s.g();
+      for (var i = 1; i <= count; i++) {
+        x += Math.floor(this.width / (count + 2));
+        this._circle(g, x, midX, midY);
+      }
+      g.attr({fill: this.primaryColor});
+
+      var light = g.clone();
+      light.attr({
+        fill: this.secondaryColor
+      });
+      
+      var matrix = new Snap.matrix();
+      matrix.translate(-(this.width / 7), -(this.height / 3.5));
+      matrix.rotate(-10, midX, midY);
+      matrix.scale(1.1);
+      light.transform(matrix);
+
+      var mask = g.clone().attr({fill: '#fff'});
+      s.g(g, light).attr({mask: mask});
+    }
+  });
+</script>

@@ -1,0 +1,37 @@
+<dom-module id="fl-intro">
+  <style>
+    :host {
+      @apply(--layout-vertical);
+    }
+    iron-image {
+      /*background-color: var(--primary-background-color);*/
+      @apply(--layout-self-center);
+      margin: var(--fl-intro-iron-image-margin);
+    }
+    iron-image /deep/ img::shadow {
+        margin: 0 auto;
+        height: auto;
+        display: block;
+        max-width: 100%;
+    }
+    h1 {
+      @apply(--layout-self-center);
+      @apply(--fl-intro-headline-font);
+      margin: var(--fl-intro-headline-margin);
+    }
+    p {
+      @apply(--fl-intro-subhead-font);
+      margin: var(--fl-intro-subhead-margin);
+    }
+  </style>
+  <template>
+    <iron-image preload id="image" src="../../images/logo.png"></iron-image>
+    <h1>Let's Get Freaky With Technology</h1>
+    <p>Awesome web &amp; mobile development team in Japan.</p>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'fl-intro'
+  });
+</script>
