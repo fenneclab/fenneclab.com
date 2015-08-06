@@ -34,15 +34,15 @@
       @apply(--layout-horizontal);
       @apply(--layout-center-justified);
     }
-    iron-image {
+    object {
       @apply(--layout-self-center);
     }
-    iron-image.size {
+    object.size {
       width: 215px;
       height: 313px;
     }
     @media (max-width: 600px) {
-      iron-image.size {
+      object.size {
         width: 172px;
         height: 250px;
       }
@@ -56,7 +56,7 @@
       <fl-the-cloud class="cloud-4" width="70" height="30" primary-color="#e6e0d0" secondary-color="#fffdf8"></fl-the-cloud>
     </div>
     <div class="fl-the-ground">
-      <iron-image preload class="size" src="../../images/chara.svg"></iron-image>
+      <object class="size" type="image/svg+xml" data="../../images/chara.svg"></object>
     </div>
   </template>
 </dom-module>
