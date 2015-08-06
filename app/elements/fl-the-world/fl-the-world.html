@@ -1,8 +1,6 @@
 <dom-module id="fl-the-world">
   <style>
     :host {
-      --fl-the-world-iron-image-margin: 0px 90px;
-      background-color: var(--primary-background-color);
       @apply(--layout-fit);
       z-index: -1000;
     }
@@ -37,16 +35,17 @@
       @apply(--layout-center-justified);
     }
     iron-image {
-      /*background-color: var(--primary-background-color);*/
-      margin: var(--fl-the-world-iron-image-margin);
-
-      /*right: 50%;*/
+      @apply(--layout-self-center);
     }
-    iron-image /deep/ img::shadow {
-        margin: 0 auto;
-        height: auto;
-        display: block;
-        max-width: 100%;
+    iron-image.size {
+      width: 215px;
+      height: 313px;
+    }
+    @media (max-width: 600px) {
+      iron-image.size {
+        width: 172px;
+        height: 250px;
+      }
     }
   </style>
   <template>
@@ -57,7 +56,7 @@
       <fl-the-cloud class="cloud-4" width="70" height="30" primary-color="#e6e0d0" secondary-color="#fffdf8"></fl-the-cloud>
     </div>
     <div class="fl-the-ground">
-      <iron-image preload src="../../images/chara.png"></iron-image>
+      <iron-image preload class="size" src="../../images/chara.svg"></iron-image>
     </div>
   </template>
 </dom-module>
